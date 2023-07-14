@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 
 
-import styles from "@/styles/home.module.css";
+import styles from "@/styles/index.module.css";
 
 export default function Home() {
 
