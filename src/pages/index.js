@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/index.module.css";
-
+import CustomHead from "@/components/CustomHead";
 export default function Home() {
   const [isDead, setIsDead] = useState(false);
   const [age, setAge] = useState("");
@@ -24,22 +24,26 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      {loaded ? (
-        <>
-          <p className={styles.answer}>
-            {isDead ? "YES (sorry)" : "NOT YET"}
-          </p>
-          <p className={styles.age}>
-            {isDead ? `He was ${age} years old` : `He is ${age} years old`}
-          </p>
-          {isDead && (
-            <p className={styles.deathDate}>He died on {deathDate}</p>
-          )}
-        </>
-      ) : (
-        <p className={styles.loading}>Asking God...</p>
-      )}
-    </div>
+    <><CustomHead
+      title="Is Jimmy Carter Dead Yet?"
+      description="We all know Jimmy Carter is going to die soon. But is he dead yet? Find out here!"
+      image="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/JimmyCarterPortrait2.jpg/640px-JimmyCarterPortrait2.jpg"
+      url="https://isjimmydeadyet.com" /><div className={styles.container}>
+        {loaded ? (
+          <>
+            <p className={styles.answer}>
+              {isDead ? "YES (sorry)" : "NOT YET"}
+            </p>
+            <p className={styles.age}>
+              {isDead ? `He was ${age} years old` : `He is ${age} years old`}
+            </p>
+            {isDead && (
+              <p className={styles.deathDate}>He died on {deathDate}</p>
+            )}
+          </>
+        ) : (
+          <p className={styles.loading}>Asking God...</p>
+        )}
+      </div></>
   );
 }
