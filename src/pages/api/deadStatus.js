@@ -11,7 +11,8 @@ async function getDeadStatus() {
   })
   
   const data = await (await response).json();
-  
+
+
   let returnData = {
     is_dead: !data[0]["is_alive"],
     age: data[0]["age"]
@@ -21,6 +22,14 @@ async function getDeadStatus() {
     returnData["death_date"] = data[0]["death"];
   }
 
+
+  // check if his birthday is today
+    const today = new Date();
+  const dateParts = data[0]["birthday"].split('-').map(part => parseInt(part, 10));
+  const birthDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);  // Adjust the month
+
+  returnData["is_birthday"] = (today.getDate() === birthDate.getDate()) &&
+      (today.getMonth() === birthDate.getMonth());
   return returnData;
 }
 export default async function handler(req, res) {

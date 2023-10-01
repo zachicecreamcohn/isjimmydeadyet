@@ -6,12 +6,14 @@ export default function Home() {
   const [age, setAge] = useState("");
   const [deathDate, setDeathDate] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [isBirthday, setIsBirthday] = useState(false);
 
   useEffect(() => {
     async function getDeadStatus() {
       const response = await fetch("/api/deadStatus");
       const data = await response.json();
 
+      setIsBirthday(data.is_birthday)
       setIsDead(data.is_dead);
       setAge(data.age);
       if (data.is_dead) {
@@ -34,12 +36,19 @@ export default function Home() {
             <p className={styles.answer}>
               {isDead ? "YES (sorry)" : "NOT YET"}
             </p>
+
             <p className={styles.age}>
               {isDead ? `He was ${age} years old` : `He is ${age} years old`}
             </p>
             {isDead && (
               <p className={styles.deathDate}>He died on {deathDate}</p>
             )}
+
+
+            {isBirthday && (
+                <h3 className={styles.birthday}>🎉🎉 Happy birthday Jimmy! 🎉🎉</h3>
+            )}
+
           </>
         ) : (
           <p className={styles.loading}>Asking God...</p>

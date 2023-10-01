@@ -11,3 +11,8 @@
 .container .answer {
     font-size: 5rem;
 }
+
+.birthday {
+    margin-top: 3rem;
+    color: deeppink
+}
